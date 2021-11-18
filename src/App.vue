@@ -31,7 +31,8 @@ export default {
 
   input {
     border-style: groove;
-    width: 200px;
+    width: 80%;
+    height: 89%;
   }
 
   button {
