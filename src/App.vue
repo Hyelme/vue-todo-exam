@@ -1,8 +1,8 @@
 <template>
   <div id="app">
     <TodoHeader></TodoHeader>
-    <TodoInput></TodoInput>
-    <TodoList :propsdata="todoItem"></TodoList>
+    <TodoInput @addTodoItem="addOneItem"></TodoInput> <!-- addTodoItem에 담긴 데이터를 addOneItem에 파라미터로 보냄 -->
+    <TodoList :propsdata="todoItem"></TodoList> <!-- todoItem 데이터를 propsdata에 담아 TodoList.vue로 보냄 -->
     <TodoFooter></TodoFooter>
   </div>
 </template>
@@ -17,6 +17,14 @@ export default {
   data() {
     return {
       todoItem:[]
+    }
+  },
+  methods: {
+    addOneItem(todoItem) { //리스트 추가 기능
+      //저장하는 로직
+      var obj = {completed: false, item: todoItem};
+      localStorage.setItem(todoItem, JSON.stringify(obj));
+      this.todoItem.push(obj);
     }
   },
   created() {
