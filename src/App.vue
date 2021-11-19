@@ -2,7 +2,7 @@
   <div id="app">
     <TodoHeader></TodoHeader>
     <TodoInput></TodoInput>
-    <TodoList></TodoList>
+    <TodoList :propsdata="todoItem"></TodoList>
     <TodoFooter></TodoFooter>
   </div>
 </template>
@@ -14,6 +14,22 @@ import TodoList from './components/TodoList.vue'
 import TodoFooter from './components/TodoFooter.vue'
 
 export default {
+  data() {
+    return {
+      todoItem:[]
+    }
+  },
+  created() {
+    // TodoList 기능 가져옴
+    if(localStorage.length > 0) {
+      for(var i = 0; i<localStorage.length; i++) {
+        if(localStorage.key(i) !== 'loglevel:webpack-dev-server'){
+          this.todoItem.push(JSON.parse(localStorage.getItem(localStorage.key(i))));
+          // this.todoItem.push(localStorage.key(i));
+        }
+      }
+    }
+  },
   components: {
     'TodoHeader' : TodoHeader,
     'TodoInput' : TodoInput,
